@@ -27,6 +27,7 @@ import static christmas.model.discount.DiscountResult.totalDiscountResult;
 import static christmas.model.menu.OrderMenu.getMenuCount;
 import static christmas.model.menu.OrderMenu.getPresentGiftPrice;
 import static christmas.model.menu.OrderMenu.getTotalOrderAmount;
+import static christmas.model.menu.RestaurantMenu.CHAMPAGNE;
 import static christmas.view.OutputView.printDiscountResult;
 import static christmas.view.OutputView.printResult;
 import static java.lang.Math.abs;
@@ -85,7 +86,7 @@ public class DiscountController {
     }
 
     private void showPresentResult() {
-        printResult(SHOW_PRESENT.getMessage(), THE_PRESENT.getMessage());
+        printResult(SHOW_PRESENT.getMessage(), CHAMPAGNE.getName() + THE_PRESENT.getMessage());
     }
 
     private void showTotalDiscountResult() {

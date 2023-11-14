@@ -10,7 +10,7 @@ import static christmas.constants.ShowingMessage.SHOW_WELCOME;
 import static java.lang.String.format;
 import static java.util.Arrays.stream;
 
-import christmas.execption.PlannerException;
+import christmas.exception.PlannerException;
 import christmas.model.discount.Discount;
 import java.util.Map;
 
