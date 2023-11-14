@@ -1,7 +1,7 @@
 ---
 ## ✨&nbsp;&nbsp;프로젝트 설명
 ### [12월 이벤트 플래너 구현]
-비즈니스 팀에서 진행할 12월 이벤트의 고객들에게 제공할 이벤트 플래너를 만드는 프로젝트이다.
+**비즈니스 팀에서 진행할 12월 이벤트의 고객들에게 제공할 이벤트 플래너를 만드는 프로젝트이다.**
 
 #### 메뉴
 
@@ -85,7 +85,6 @@
 * [OutputView] "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다." 메시지 출력
 * [InputView] "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)" 메시지 출력
 * [InputView] 사용자에게 문자열을 입력받는다.
-* [DiscountController] 방문 날짜 [Day] 클래스에 저장
 * [Validator] 유효성 검사 : 숫자가 아니거나 1~31 사이가 아니면 예외 처리 후 다시 입력
 * [PlannerException] 예외 사항 발생 시 "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요." 메시지 출력
 
@@ -93,7 +92,7 @@
 
 * [InputView] "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)" 출력
 * [InputView] 사용자에게 문자열을 입력받는다.
-* [MenuController] 문자열 검사한다.
+* [Controller] 문자열 검사한다.
 * [Validator] 유효성 검사 : 없는 메뉴이면 예외 처리 후 다시 입력
 * [Validator] 유효성 검사 : 메뉴 형식이 다르면 예외 처리 후 다시 입력
 * [Validator] 유효성 검사 : 메뉴 중복일 경우 예외 처리 후 다시 입력
@@ -102,31 +101,23 @@
 * [Validator] 유효성 검사 : 개수가 1이상 숫자가 아닐 경우 예외 처리 후 다시 입력
 * [PlannerException] 예외 사항 발생 시 "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요." 메시지 출력
 
-#### [MenuController] 주문 메뉴 관리
+#### [RestaurantMenu] 주문 메뉴 관리
 
-* [RestaurantAppetizerMenu] Enum ("양송이수프", 6_000) 형태로 저장
-* [RestaurantMainMenu] Enum ("티본스테이크", 55_000) 형태로 저장
-* [RestaurantDessertMenu] Enum ("초코케이크", 15_000) 형태로 저장
-* [RestaurantDrinkMenu] Enum ("제로콜라", 3_000) 형태로 저장
-
-* [Menu] Enum 에서 사용자가 주문한 메뉴 찾아 각각 이름과 가격 record 형으로 저장
-* [AppetizerMenu] 애피타이저 메뉴 record list 로 저장
-* [MainMenu] 메인 메뉴 record list 로 저장
-* [DessertMenu] 디저트 메뉴 record list 로 저장
-* [DrinkMenu] 음료 메뉴 record list 로 저장
-
-* [TotalOrder] 총 주문 금액 계산 및 저장
+* [RestaurantMenu] Enum ("양송이수프", 6_000) 형태로 저장
+* [OrderMenu] 사용자가 주문한 메뉴 찾아 각각 개수 저장
+* [OrderMenu] 총 주문 금액 계산
 * [OutputView] "메뉴 %d개" 형식으로 주문한 모든 메뉴 한 줄씩 출력
 
 #### [DiscountController] 할인 혜택 내역 관리
 
-* [DiscountResult] 총 금액을 [MenuController]에서 넘겨 받아 할인 불가(총 금액 만원 미만) 일 경우 "없음" 저장
-* [DDay] [Day] 방문일이 크리스마스(25일) 이하이면 크리스마스 디데이 할인 1000 * (방문일 - 1) 계산
-* [Weekday] 평일일 경우 ([Day]객체가 판단) 디저트 메뉴 당 2023원 할인
-* [Weekend] 주말일 경우 ([Day]객체가 판단) 메인 메뉴 당 2023원 할인
+* [Discount] 총 금액을 넘겨 받아 할인 불가(총 금액 만원 미만) 일 경우 "없음" 저장
+* [DiscountResult] 총 금액을 넘겨 받아 할인 불가(총 금액 만원 미만) 일 경우 "없음" 저장
+* [DDay] 방문일이 크리스마스(25일) 이하이면 크리스마스 디데이 할인 1000 * (방문일 - 1) 계산
+* [MenuDiscount] 평일일 경우 ([DDay]객체가 판단) 디저트 메뉴 당 2023원 할인
+* [MenuDiscount] 주말일 경우 ([DDay]객체가 판단) 메인 메뉴 당 2023원 할인
 * [SpecialDay] 특별한 날(달력의 별)인 경우 총 금액에서 1000원 할인
-* [Presentation] 총 금액을 [MenuController]에서 넘겨 받아 증정 여부 판단(총 금액 12만 이상) 후 저장
-* [DiscountResult] 적용된 할인만 할인만 저장
+* [Presentation] 총 금액을 넘겨 받아 증정 여부 판단(총 금액 12만 이상) 후 저장
+* [DiscountResult] 적용된 할인만 저장
 * [DiscountResult] 할인 금액 계산
 * [DiscountResult] 총 혜택 금액 계산 (할인 금액 합계 + 증정 메뉴 가격)
 * [DiscountResult] 총 혜택 금액 계산 따라 이벤트 배지 계산
@@ -137,37 +128,37 @@
 ```
 * [DiscountResult] 할인 후 예상 결제 금액 계산
 
-#### [Controller] 주문 메뉴 출력
+#### [DiscountController] 주문 메뉴 출력
 
 * [OutputView] "<주문 메뉴>" 메시지 출력
 * [OutputView] "메뉴 %d개" 형식으로 주문한 모든 메뉴 한 줄씩 출력
 
-#### [Controller] 할인 전 총 주문 금액 출력
+#### [DiscountController] 할인 전 총 주문 금액 출력
 
 * [OutputView] "<할인 전 총주문 금액>" 메시지 출력
 * [OutputView] 총 금액을 [MenuController]에서 넘겨 받아 "###,###%d원" 형식으로 할인 전 금액 출력
 
-#### [Controller] 증정 메뉴 여부 출력
+#### [DiscountController] 증정 메뉴 여부 출력
 
 * [OutputView] "<증정 메뉴>" 메시지 출력
 * [OutputView] 증정 가능 여부 결과[DiscountController]에서 넘겨 받아 출력
 
-#### [Controller] 혜택 내역 출력
+#### [DiscountController] 혜택 내역 출력
 
 * [OutputView] "<혜택 내역>" 메시지 출력
 * [OutputView] 혜택 내역[DiscountController]에서 넘겨 받아 "혜택 이름: -%d원" 형태로 출력
 
-#### [Controller] 총혜택 내역 출력
+#### [DiscountController] 총혜택 내역 출력
 
 * [OutputView] "<총혜택 금액>" 메시지 출력
 * [OutputView] 총 혜택 금액[DiscountController]에서 넘겨 받아 "-%d원" 형태로 출력
 
-#### [Controller] 할인 후 예상 결제 금액 출력
+#### [DiscountController] 할인 후 예상 결제 금액 출력
 
 * [OutputView] "<할인 후 예상 결제 금액>" 메시지 출력
 * [OutputView] 할인 후 예상 결제 금액[DiscountController]에서 넘겨 받아 "%d원" 형태로 출력
 
-#### [Controller] 할인 후 예상 결제 금액 출력
+#### [DiscountController] 이벤트 배지 출력
 
 * [OutputView] "<12월 이벤트 배지>" 메시지 출력
 * [OutputView] 이벤트 배지[DiscountController]에서 넘겨 받아 출력
