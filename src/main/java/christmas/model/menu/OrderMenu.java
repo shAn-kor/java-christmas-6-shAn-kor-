@@ -16,9 +16,9 @@ public class OrderMenu {
                 );
     }
 
-    public static Boolean ifSaleThisFood (String name) {
+    public static Boolean ifSaleThisFood (String findName) {
         return stream(RestaurantMenu.values())
-                .anyMatch(restaurantMenu -> restaurantMenu.getName().equals(name));
+                .anyMatch(restaurantMenu -> restaurantMenu.getName().equals(findName));
     }
 
     public static Boolean ifOrderOnlyDrink (List<String> name) {
