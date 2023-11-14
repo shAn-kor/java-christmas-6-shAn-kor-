@@ -117,7 +117,6 @@
 * [MenuDiscount] 주말일 경우 ([DDay]객체가 판단) 메인 메뉴 당 2023원 할인
 * [SpecialDay] 특별한 날(달력의 별)인 경우 총 금액에서 1000원 할인
 * [Presentation] 총 금액을 넘겨 받아 증정 여부 판단(총 금액 12만 이상) 후 저장
-* [DiscountResult] 적용된 할인만 저장
 * [DiscountResult] 할인 금액 계산
 * [DiscountResult] 총 혜택 금액 계산 (할인 금액 합계 + 증정 메뉴 가격)
 * [Badge] 총 혜택 금액 계산 따라 이벤트 배지 계산
@@ -128,37 +127,19 @@
 ```
 * [DiscountResult] 할인 후 예상 결제 금액 계산
 
-#### [DiscountController] 주문 메뉴 출력
+#### [DiscountController] 결과 출력
 
 * [OutputView] "<주문 메뉴>" 메시지 출력
 * [OutputView] "메뉴 %d개" 형식으로 주문한 모든 메뉴 한 줄씩 출력
-
-#### [DiscountController] 할인 전 총 주문 금액 출력
-
 * [OutputView] "<할인 전 총주문 금액>" 메시지 출력
 * [OutputView] 총 금액을 [MenuController]에서 넘겨 받아 "###,###%d원" 형식으로 할인 전 금액 출력
-
-#### [DiscountController] 증정 메뉴 여부 출력
-
 * [OutputView] "<증정 메뉴>" 메시지 출력
 * [OutputView] 증정 가능 여부 결과[DiscountController]에서 넘겨 받아 출력
-
-#### [DiscountController] 혜택 내역 출력
-
 * [OutputView] "<혜택 내역>" 메시지 출력
 * [OutputView] 혜택 내역[DiscountController]에서 넘겨 받아 "혜택 이름: -%d원" 형태로 출력
-
-#### [DiscountController] 총혜택 내역 출력
-
 * [OutputView] "<총혜택 금액>" 메시지 출력
 * [OutputView] 총 혜택 금액[DiscountController]에서 넘겨 받아 "-%d원" 형태로 출력
-
-#### [DiscountController] 할인 후 예상 결제 금액 출력
-
 * [OutputView] "<할인 후 예상 결제 금액>" 메시지 출력
 * [OutputView] 할인 후 예상 결제 금액[DiscountController]에서 넘겨 받아 "%d원" 형태로 출력
-
-#### [DiscountController] 이벤트 배지 출력
-
 * [OutputView] "<12월 이벤트 배지>" 메시지 출력
 * [OutputView] 이벤트 배지[DiscountController]에서 넘겨 받아 출력

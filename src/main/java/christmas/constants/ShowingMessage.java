@@ -1,14 +1,13 @@
 package christmas.constants;
 
 import static christmas.constants.PolicyNumbers.MONTH;
-import static christmas.model.menu.RestaurantMenu.CHAMPAGNE;
 
 public enum ShowingMessage {
     APPETIZER("Appetizer"),
     MAIN("Main"),
     DESSERT("Dessert"),
     DRINK("Drink"),
-    THE_PRESENT(CHAMPAGNE.getName() + " 1개"),
+    THE_PRESENT(" 1개"),
     SHOW_WELCOME("안녕하세요! 우테코 식당 " + MONTH.getNumber() + "월 이벤트 플래너입니다."),
     INPUT_DAY(MONTH.getNumber() + "월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)"),
     INPUT_MENU("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)"),
