@@ -120,7 +120,7 @@
 * [DiscountResult] 적용된 할인만 저장
 * [DiscountResult] 할인 금액 계산
 * [DiscountResult] 총 혜택 금액 계산 (할인 금액 합계 + 증정 메뉴 가격)
-* [DiscountResult] 총 혜택 금액 계산 따라 이벤트 배지 계산
+* [Badge] 총 혜택 금액 계산 따라 이벤트 배지 계산
 ```
 5천원 이상 : 별
 만원 이상 : 트리
