@@ -7,14 +7,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class PresentationTest {
-    @DisplayName("총 결제 금액이 증정 상품 제공 기준 이상이면 증정 상품 금액 반환, 아니면 0 반환")
+    @DisplayName("총 결제 금액이 증정 상품 제공 기준 이상이면 true 반환, 아니면 false 반환")
     @ParameterizedTest
     @CsvSource(
             value = {
-                    "10000:0", "30000:0", "119999:0", "120000:25000", "999999999:25000"
+                    "10000:false", "30000:false", "119999:false", "120000:true", "999999999:true"
             }, delimiter = ':'
     )
-    void testSpecialDayDiscount(Integer money, Integer answer) {
+    void testPresentation(Integer money, Boolean answer) {
         Presentation presentation = Presentation.of(money);
 
         assertThat(presentation.isPresent()).isEqualTo(answer);

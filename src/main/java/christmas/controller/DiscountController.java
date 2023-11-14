@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import static christmas.constants.PolicyNumbers.DISCOUNT_CUT_LINE;
+import static christmas.constants.PolicyNumbers.FOOD_DISCOUNT_PRICE;
 import static christmas.constants.ShowingMessage.DESSERT;
 import static christmas.constants.ShowingMessage.EXPECTED_PAYMENT_AMOUNT;
 import static christmas.constants.ShowingMessage.MAIN;
@@ -23,6 +24,9 @@ import static christmas.model.discount.Discount.getNoneDiscount;
 import static christmas.model.discount.Discount.noDiscount;
 import static christmas.model.discount.DiscountResult.getExpectedPaymentAmount;
 import static christmas.model.discount.DiscountResult.totalDiscountResult;
+import static christmas.model.menu.OrderMenu.getMenuCount;
+import static christmas.model.menu.OrderMenu.getPresentGiftPrice;
+import static christmas.model.menu.OrderMenu.getTotalOrderAmount;
 import static christmas.view.OutputView.printDiscountResult;
 import static christmas.view.OutputView.printResult;
 import static java.lang.Math.abs;
@@ -32,20 +36,19 @@ import christmas.model.discount.DDayDiscount;
 import christmas.model.discount.MenuDiscount;
 import christmas.model.discount.Presentation;
 import christmas.model.discount.SpecialDay;
-import christmas.model.menu.OrderMenu;
 
 public class DiscountController {
-    public void checkDiscount(Integer day, OrderMenu orderMenu) {
-        if (orderMenu.getTotalOrderAmount() < DISCOUNT_CUT_LINE.getNumber()) {
+    public void checkDiscount(Integer day) {
+        if (getTotalOrderAmount() < DISCOUNT_CUT_LINE.getNumber()) {
             noDiscount();
             return;
         }
 
-        checkAllDiscount(day, orderMenu);
+        checkAllDiscount(day);
     }
 
-    public void showResult(OrderMenu orderMenu) {
-        Integer totalMoney = orderMenu.getTotalOrderAmount();
+    public void showResult() {
+        Integer totalMoney = getTotalOrderAmount();
         showBeforeDiscount(totalMoney);
 
         if (getNoneDiscount()) {
@@ -58,14 +61,12 @@ public class DiscountController {
         showBadge(totalMoney);
     }
 
-    public static void checkAllDiscount(Integer day, OrderMenu orderMenu) {
-        MenuDiscount menuDiscount = MenuDiscount.of(day);
-
+    public static void checkAllDiscount(Integer day) {
         DISCOUNT_D_DAY.setMoney(DDayDiscount.of(day).checkDDAyDiscount());
         DISCOUNT_SPECIAL_DAY.setMoney(SpecialDay.of(day).specialDayDiscount());
-        DISCOUNT_WEEK.setMoney(menuDiscount.calculateDiscount(DESSERT.getMessage(), orderMenu.getDessertMenuCount()));
-        DISCOUNT_WEEKEND.setMoney(menuDiscount.calculateDiscount(MAIN.getMessage(), orderMenu.getMainMenuCount()));
-        GIVEN_PRESENT.setMoney(Presentation.of(orderMenu.getTotalOrderAmount()).isPresent());
+        DISCOUNT_WEEK.setMoney(setMenuDiscount(day, DESSERT.getMessage()));
+        DISCOUNT_WEEKEND.setMoney(setMenuDiscount(day, MAIN.getMessage()));
+        GIVEN_PRESENT.setMoney(setPresentResult(getTotalOrderAmount()));
     }
 
     private void showNoneDiscountResult(Integer money) {
@@ -92,6 +93,24 @@ public class DiscountController {
                 SHOW_TOTAL_DISCOUNT.getMessage(),
                 format(MINUS_MONEY_FORMAT.getMessage(), abs(totalDiscountResult()))
         );
+    }
+
+    private static Integer setPresentResult(Integer money) {
+        if (Presentation.of(money).isPresent()) {
+            return getPresentGiftPrice();
+        }
+
+        return 0;
+    }
+
+    private static Integer setMenuDiscount (Integer day, String type) {
+        MenuDiscount menuDiscount = MenuDiscount.of(day);
+
+        if (menuDiscount.calculateDiscount(type).equals(type)) {
+            return getMenuCount(type) * FOOD_DISCOUNT_PRICE.getNumber();
+        }
+
+        return 0;
     }
 
     private void showExpectedPaymentAmount(Integer money) {

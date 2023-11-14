@@ -1,9 +1,9 @@
 package christmas.model.discount;
 
 import static christmas.constants.AnniversaryDays.WEEKEND;
-import static christmas.constants.PolicyNumbers.FOOD_DISCOUNT_PRICE;
 import static christmas.constants.ShowingMessage.DESSERT;
 import static christmas.constants.ShowingMessage.MAIN;
+import static christmas.constants.ShowingMessage.NONE_DISCOUNT;
 
 public class MenuDiscount {
     private final Integer day;
@@ -16,16 +16,13 @@ public class MenuDiscount {
         return new MenuDiscount(day);
     }
 
-    public Integer calculateDiscount(String menuType, Integer count) {
-        if (this.isWeekend() && menuType.equals(MAIN.getMessage())){
-            return count * FOOD_DISCOUNT_PRICE.getNumber();
+    public String calculateDiscount(String menuType) {
+        if ((isWeekend() && menuType.equals(MAIN.getMessage()))
+                || (!isWeekend() && menuType.equals(DESSERT.getMessage()))) {
+            return menuType;
         }
 
-        if (!this.isWeekend() && menuType.equals(DESSERT.getMessage())){
-            return count * FOOD_DISCOUNT_PRICE.getNumber();
-        }
-
-        return 0;
+        return NONE_DISCOUNT.getMessage();
     }
 
     private Boolean isWeekend() {
