@@ -6,7 +6,7 @@ import static java.util.Arrays.stream;
 import java.util.Comparator;
 
 public enum Badge {
-    FIRST("산타", 50000),
+    FIRST("산타", 20000),
     SECOND("트리", 10000),
     THIRD("별", 5000);
 

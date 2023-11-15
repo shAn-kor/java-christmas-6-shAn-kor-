@@ -15,8 +15,8 @@ class BadgeTest {
     @CsvSource(value = {
             "1000:없음", "4999:없음",
             "5000:별", "9999:별",
-            "10000:트리", "49999:트리",
-            "50000:산타", "999999:산타"
+            "10000:트리", "19999:트리",
+            "20000:산타", "999999:산타"
     }, delimiter = ':')
     void testBadge(Integer money, String badge) {
         assertThat(getBadge(money)).isEqualTo(badge);
