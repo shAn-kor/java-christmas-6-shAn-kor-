@@ -3,8 +3,6 @@ package christmas.controller;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static christmas.exception.ErrorMessage.FAILED_INPUT_DAY;
 import static christmas.exception.ErrorMessage.FAILED_ORDER;
-import static christmas.model.discount.Discount.setDiscountZero;
-import static christmas.model.menu.OrderMenu.setCountZero;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -60,8 +58,6 @@ class ControllerTest extends NsTest {
 
     @AfterEach
     void tearDown() {
-        setCountZero();
-        setDiscountZero();
         Console.close();
     }
 }

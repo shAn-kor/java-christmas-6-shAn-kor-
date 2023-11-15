@@ -45,5 +45,6 @@ public enum Discount {
 
     public static void setDiscountZero() {
         Arrays.stream(Discount.values()).forEach(discount -> discount.setMoney(0));
+        ifCanDiscount = true;
     }
 }

@@ -20,12 +20,14 @@ import static christmas.model.discount.Discount.DISCOUNT_WEEK;
 import static christmas.model.discount.Discount.DISCOUNT_WEEKEND;
 import static christmas.model.discount.Discount.GIVEN_PRESENT;
 import static christmas.model.discount.Discount.noDiscount;
+import static christmas.model.discount.Discount.setDiscountZero;
 import static christmas.model.discount.DiscountResult.getDiscountResultList;
 import static christmas.model.discount.DiscountResult.getExpectedPaymentAmount;
 import static christmas.model.discount.DiscountResult.totalDiscountResult;
 import static christmas.model.menu.OrderMenu.getMenuCount;
 import static christmas.model.menu.OrderMenu.getPresentGiftPrice;
 import static christmas.model.menu.OrderMenu.getTotalOrderAmount;
+import static christmas.model.menu.OrderMenu.setCountZero;
 import static christmas.model.menu.RestaurantMenu.CHAMPAGNE;
 import static christmas.view.OutputView.printDiscountResult;
 import static christmas.view.OutputView.printResult;
@@ -55,6 +57,9 @@ public class DiscountController {
         showTotalDiscountResult();
         showExpectedPaymentAmount(totalMoney);
         showBadge(totalMoney);
+
+        setCountZero();
+        setDiscountZero();
     }
 
     public static void checkAllDiscount(Integer day) {

@@ -3,11 +3,11 @@ package christmas.exception;
 public class PlannerException extends IllegalArgumentException{
     private static final String errorStartMessage = "[ERROR] ";
 
-    private PlannerException(ErrorMessage errorMessage) {
-        super(errorStartMessage + errorMessage.getMessage());
+    private PlannerException(ErrorMessage errorMessage, ErrorMessage errorMessageDetail) {
+        super(errorStartMessage + errorMessage.getMessage() + errorMessageDetail.getMessage());
     }
 
-    public static PlannerException of (ErrorMessage errorMessage) {
-        return new PlannerException(errorMessage);
+    public static PlannerException of (ErrorMessage errorMessage, ErrorMessage errorMessageDetail) {
+        return new PlannerException(errorMessage, errorMessageDetail);
     }
 }

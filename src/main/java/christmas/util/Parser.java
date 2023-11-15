@@ -2,6 +2,7 @@ package christmas.util;
 
 import static christmas.constants.ShowingMessage.MENU_PARSER;
 import static christmas.constants.ShowingMessage.NAME_COUNT_PARSER;
+import static christmas.exception.ErrorMessage.DUPLICATE_MENU;
 import static christmas.exception.ErrorMessage.FAILED_ORDER;
 import static java.util.stream.Collectors.toMap;
 
@@ -26,7 +27,7 @@ public class Parser {
                         entry -> entry.get(0),
                         entry -> entry.get(1),
                         (existingValue, newValue) -> {
-                            throw PlannerException.of(FAILED_ORDER);
+                            throw PlannerException.of(FAILED_ORDER, DUPLICATE_MENU);
                         }
                 ));
     }

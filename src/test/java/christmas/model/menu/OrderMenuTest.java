@@ -2,7 +2,6 @@ package christmas.model.menu;
 
 import static christmas.model.menu.OrderMenu.getTotalOrderAmount;
 import static christmas.model.menu.OrderMenu.orderFoods;
-import static christmas.model.menu.OrderMenu.setCountZero;
 import static christmas.model.menu.RestaurantMenu.CHOCO_CAKE;
 import static christmas.model.menu.RestaurantMenu.RED_WINE;
 import static christmas.util.Convertor.convertMapValues;
@@ -44,7 +43,6 @@ class OrderMenuTest {
 
     @AfterEach
     void tearDown() {
-        setCountZero();
         Console.close();
     }
 }

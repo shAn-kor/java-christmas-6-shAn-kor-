@@ -1,8 +1,6 @@
 package christmas;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static christmas.model.discount.Discount.setDiscountZero;
-import static christmas.model.menu.OrderMenu.setCountZero;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -60,8 +58,6 @@ class ApplicationTest extends NsTest {
 
     @AfterEach
     void tearDown() {
-        setCountZero();
-        setDiscountZero();
         Console.close();
     }
 }

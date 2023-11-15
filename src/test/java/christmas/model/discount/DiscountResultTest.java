@@ -9,7 +9,6 @@ import static christmas.model.discount.Discount.DISCOUNT_WEEKEND;
 import static christmas.model.discount.Discount.GIVEN_PRESENT;
 import static christmas.model.discount.Discount.canDiscount;
 import static christmas.model.discount.Discount.noDiscount;
-import static christmas.model.discount.Discount.setDiscountZero;
 import static christmas.model.discount.DiscountResult.getDiscountResultList;
 import static christmas.model.discount.DiscountResult.getExpectedPaymentAmount;
 import static christmas.model.discount.DiscountResult.totalDiscountResult;
@@ -94,7 +93,6 @@ class DiscountResultTest {
 
     @AfterAll
     static void tearDown() {
-        setDiscountZero();
         Console.close();
     }
 }
