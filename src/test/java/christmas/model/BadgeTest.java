@@ -3,6 +3,8 @@ package christmas.model;
 import static christmas.model.Badge.getBadge;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import camp.nextstep.edu.missionutils.Console;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -18,5 +20,10 @@ class BadgeTest {
     }, delimiter = ':')
     void testBadge(Integer money, String badge) {
         assertThat(getBadge(money)).isEqualTo(badge);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Console.close();
     }
 }

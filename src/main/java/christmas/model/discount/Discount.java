@@ -1,5 +1,7 @@
 package christmas.model.discount;
 
+import java.util.Arrays;
+
 public enum Discount {
     DISCOUNT_D_DAY("크리스마스 디데이 할인"),
     DISCOUNT_WEEK("평일 할인"),
@@ -7,7 +9,7 @@ public enum Discount {
     DISCOUNT_SPECIAL_DAY("특별 할인"),
     GIVEN_PRESENT("증정 이벤트");
 
-    private static Boolean noneDiscount = false;
+    private static Boolean ifCanDiscount = true;
     private final String message;
 
     private Integer money;
@@ -18,11 +20,15 @@ public enum Discount {
     }
 
     public static void noDiscount() {
-        noneDiscount = true;
+        ifCanDiscount = false;
     }
 
-    public static Boolean getNoneDiscount() {
-        return noneDiscount;
+    public static void canDiscount() {
+        ifCanDiscount = true;
+    }
+
+    public static Boolean getIfCanDiscount() {
+        return ifCanDiscount;
     }
 
     public String getMessage() {
@@ -35,5 +41,9 @@ public enum Discount {
 
     public void setMoney(Integer money) {
         this.money = money;
+    }
+
+    public static void setDiscountZero() {
+        Arrays.stream(Discount.values()).forEach(discount -> discount.setMoney(0));
     }
 }

@@ -10,7 +10,9 @@ import static christmas.util.Validator.validateMenu;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.exception.PlannerException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -69,7 +71,7 @@ class ValidatorTest {
 
     @DisplayName("메뉴 입력 시 없는 메뉴, 중복 메뉴, 음료만 주문, 개수 초과 등 규정과 다를 경우 예외 발생")
     @ParameterizedTest
-    @ValueSource(strings={"새송이수프-1", "레드와인-2","양송이수프-31","양송이수프-1,양송이수프-3","양송이수프-ㅁ,레드와인-3"})
+    @ValueSource(strings={"새송이수프-1", "레드와인-2","양송이수프-31","양송이수프-1,양송이수프-3","양송이수프-ㅁ,레드와인-3","양송이수프-0"})
     void testMenuIllegal(String input) {
         assertThatThrownBy(() -> validateMenu(convertMenus(input)))
                 .isInstanceOf(PlannerException.class)
@@ -83,5 +85,10 @@ class ValidatorTest {
 
         assertThatCode(() -> validateMenu(convertMenus(input)))
                 .doesNotThrowAnyException();
+    }
+
+    @AfterEach
+    void tearDown() {
+        Console.close();
     }
 }

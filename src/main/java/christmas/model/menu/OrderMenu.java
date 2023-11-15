@@ -43,6 +43,10 @@ public class OrderMenu {
         return CHAMPAGNE.getPrice();
     }
 
+    public static void setCountZero() {
+        stream(RestaurantMenu.values()).forEach(restaurantMenu -> restaurantMenu.orderFood(0));
+    }
+
     private static List<String> getAllDrinkMenu() {
         return stream(RestaurantMenu.values())
                 .filter(restaurantMenu -> restaurantMenu.getType().equals(DRINK.getMessage()))

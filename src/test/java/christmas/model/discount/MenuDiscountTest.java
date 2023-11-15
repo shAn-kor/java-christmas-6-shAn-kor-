@@ -2,6 +2,8 @@ package christmas.model.discount;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import camp.nextstep.edu.missionutils.Console;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,5 +18,10 @@ class MenuDiscountTest {
     )
     void testMenuDiscount(Integer day, String type, String answer) {
         assertThat(MenuDiscount.of(day).calculateDiscount(type)).isEqualTo(answer);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Console.close();
     }
 }

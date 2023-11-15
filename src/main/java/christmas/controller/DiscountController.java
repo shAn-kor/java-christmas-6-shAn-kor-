@@ -8,7 +8,6 @@ import static christmas.constants.ShowingMessage.MAIN;
 import static christmas.constants.ShowingMessage.MINUS_MONEY_FORMAT;
 import static christmas.constants.ShowingMessage.MONEY_FORMAT;
 import static christmas.constants.ShowingMessage.NONE_DISCOUNT;
-import static christmas.constants.ShowingMessage.SHOW_ALL_DISCOUNT;
 import static christmas.constants.ShowingMessage.SHOW_BADGE;
 import static christmas.constants.ShowingMessage.SHOW_BEFORE_DISCOUNT;
 import static christmas.constants.ShowingMessage.SHOW_PRESENT;
@@ -20,8 +19,8 @@ import static christmas.model.discount.Discount.DISCOUNT_SPECIAL_DAY;
 import static christmas.model.discount.Discount.DISCOUNT_WEEK;
 import static christmas.model.discount.Discount.DISCOUNT_WEEKEND;
 import static christmas.model.discount.Discount.GIVEN_PRESENT;
-import static christmas.model.discount.Discount.getNoneDiscount;
 import static christmas.model.discount.Discount.noDiscount;
+import static christmas.model.discount.DiscountResult.getDiscountResultList;
 import static christmas.model.discount.DiscountResult.getExpectedPaymentAmount;
 import static christmas.model.discount.DiscountResult.totalDiscountResult;
 import static christmas.model.menu.OrderMenu.getMenuCount;
@@ -51,12 +50,8 @@ public class DiscountController {
     public void showResult() {
         Integer totalMoney = getTotalOrderAmount();
         showBeforeDiscount(totalMoney);
-
-        if (getNoneDiscount()) {
-            showNoneDiscountResult(totalMoney);
-        }
         showPresentResult();
-        printDiscountResult();
+        printDiscountResult(getDiscountResultList());
         showTotalDiscountResult();
         showExpectedPaymentAmount(totalMoney);
         showBadge(totalMoney);
@@ -70,14 +65,6 @@ public class DiscountController {
         GIVEN_PRESENT.setMoney(setPresentResult(getTotalOrderAmount()));
     }
 
-    private void showNoneDiscountResult(Integer money) {
-        printResult(SHOW_PRESENT.getMessage(), NONE_DISCOUNT.getMessage());
-        printResult(SHOW_ALL_DISCOUNT.getMessage(), NONE_DISCOUNT.getMessage());
-        showTotalDiscountResult();
-        showExpectedPaymentAmount(money);
-        printResult(SHOW_BADGE.getMessage(), NONE_DISCOUNT.getMessage());
-    }
-
     private void showBeforeDiscount(Integer money) {
         printResult(
                 SHOW_BEFORE_DISCOUNT.getMessage(),
@@ -86,7 +73,11 @@ public class DiscountController {
     }
 
     private void showPresentResult() {
-        printResult(SHOW_PRESENT.getMessage(), CHAMPAGNE.getName() + THE_PRESENT.getMessage());
+        if (GIVEN_PRESENT.getMoney() > 0) {
+            printResult(SHOW_PRESENT.getMessage(), CHAMPAGNE.getName() + THE_PRESENT.getMessage());
+        }
+
+        printResult(SHOW_PRESENT.getMessage(), NONE_DISCOUNT.getMessage());
     }
 
     private void showTotalDiscountResult() {
